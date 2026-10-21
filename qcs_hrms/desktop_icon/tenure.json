@@ -1,0 +1,22 @@
+{
+ "app": "qcs_hrms",
+ "creation": "2025-11-17 20:33:43.201465",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "user",
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "Tenure",
+ "link_to": "Tenure",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/qcs_hrms/icons/desktop_icons/employee_lifecycle.svg",
+ "modified": "2026-10-20 12:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "Tenure",
+ "owner": "Administrator",
+ "parent_icon": "QCS HR",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

@@ -1,0 +1,100 @@
+[
+ {
+  "abbr": "_TC",
+  "company_name": "_Test Company",
+  "country": "India",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC1",
+  "company_name": "_Test Company 1",
+  "country": "United States",
+  "default_currency": "USD",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC2",
+  "company_name": "_Test Company 2",
+  "default_currency": "EUR",
+  "country": "Germany",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC3",
+  "company_name": "_Test Company 3",
+  "is_group": 1,
+  "country": "Pakistan",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC4",
+  "company_name": "_Test Company 4",
+  "parent_company": "_Test Company 3",
+  "is_group": 1,
+  "country": "Pakistan",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC5",
+  "company_name": "_Test Company 5",
+  "parent_company": "_Test Company 4",
+  "country": "Pakistan",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC6",
+  "company_name": "_Test Company 6",
+  "is_group": 1,
+  "country": "India",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "_TC7",
+  "company_name": "_Test Company 7",
+  "parent_company": "_Test Company 6",
+  "is_group": 1,
+  "country": "United States",
+  "default_currency": "USD",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List"
+ },
+ {
+  "abbr": "PGCI",
+  "company_name": "Parent Group Company India",
+  "country": "India",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List",
+  "is_group": 1
+ },
+ {
+  "abbr": "CCI",
+  "company_name": "Child Company India",
+  "country": "India",
+  "default_currency": "INR",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List",
+  "parent_company": "Parent Group Company India"
+ },
+ {
+  "abbr": "CCU",
+  "company_name": "Child Company US",
+  "country": "United States",
+  "default_currency": "USD",
+  "doctype": "Company",
+  "default_holiday_list": "_Test Holiday List",
+  "parent_company": "Parent Group Company India"
+ }
+]

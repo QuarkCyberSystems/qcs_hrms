@@ -1,1 +1,12 @@
-QCS HR
+HR Setup
+Tenure
+Recruitment
+Shift and Attendance
+Leaves
+Expenses
+Performance
+Payroll
+Tax and Benefits
+HR
+Organization
+Ledger

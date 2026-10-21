@@ -4,276 +4,186 @@ app_publisher = "Quark Cyber System FZC"
 app_description = "Standalone fork of Frappe HR"
 app_email = "support@quarkcs.com"
 app_license = "gpl-3.0"
+source_link = "https://github.com/QuarkCyberSystems/qcs_hrms"
+app_logo_url = "/assets/qcs_hrms/images/qcs-hr-logo.svg"
+app_home = "/desk/hr-setup"
 
 # Apps
 # ------------------
 
+# Standalone: runs on Frappe alone (no ERPNext, no Frappe HR)
 # required_apps = []
 
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "qcs_hrms",
-# 		"logo": "/assets/qcs_hrms/logo.png",
-# 		"title": "QCS HR",
-# 		"route": "/qcs_hrms",
-# 		"has_permission": "qcs_hrms.api.permission.has_app_permission",
-# 	}
-# ]
-
-# The dock, the rail down the left of the desk, is a document rather than a hook. Author it in
-# Manage Dock on a developer-mode site and press Export to App, and it is written to
-# `qcs_hrms/dock/qcs_hrms/qcs_hrms.json` for git to carry. An app that ships none has no
-# rail: its sidebar gets a switcher in the header instead.
-#
-# A companion app, one that extends a host app rather than standing on its own, says so with
-# `mount_on` on that same record, and its entries are appended to the host's rail. Mounting keeps
-# the companion off the apps screen, so it takes precedence over any add_to_apps_screen above.
+add_to_apps_screen = [
+	{
+		"name": "qcs_hrms",
+		"logo": "/assets/qcs_hrms/images/qcs-hr-logo.svg",
+		"title": "QCS HR",
+		"route": app_home,
+		"has_permission": "qcs_hrms.hr.utils.check_app_permission",
+	}
+]
 
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/qcs_hrms/css/qcs_hrms.css"
-# app_include_js = "/assets/qcs_hrms/js/qcs_hrms.js"
-
-# include js, css files in header of web template
-# web_include_css = "/assets/qcs_hrms/css/qcs_hrms.css"
-# web_include_js = "/assets/qcs_hrms/js/qcs_hrms.js"
-
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "qcs_hrms/public/scss/website"
-
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
-
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
-
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_kanban_js = {"doctype" : "public/js/doctype_kanban.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
-
-# Svg Icons
-# ------------------
-# include app icons in desk
-# app_include_icons = "qcs_hrms/public/icons.svg"
+app_include_js = [
+	"qcs_hrms.bundle.js",
+]
+app_include_css = "qcs_hrms.bundle.css"
+code_only_modules = {"HR": ["HR Setup"]}
+app_include_icons = ["/assets/qcs_hrms/icons/module-icons.svg"]
 
 # Home Pages
 # ----------
 
-# application home page (will override Website Settings)
-# home_page = "login"
-
-# website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
+calendars = ["Leave Application"]
 
 # Generators
 # ----------
 
 # automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# automatically load and sync documents of this doctype from downstream apps
-# importable_doctypes = [doctype_1]
+website_generators = ["Job Opening"]
 
 # Jinja
 # ----------
 
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "qcs_hrms.utils.jinja_methods",
-# 	"filters": "qcs_hrms.utils.jinja_filters"
-# }
+jinja = {
+	"methods": [
+		"qcs_hrms.utils.get_country",
+	],
+}
 
 # Installation
 # ------------
 
-# before_install = "qcs_hrms.install.before_install"
-# after_install = "qcs_hrms.install.after_install"
+after_install = "qcs_hrms.install.after_install"
+after_migrate = "qcs_hrms.setup.update_select_perm_after_install"
+
+# Frappe-only sites have no Company step in the wizard: QCS HR adds one
+setup_wizard_requires = "assets/qcs_hrms/js/setup_wizard.js"
+setup_wizard_stages = "qcs_hrms.setup_wizard.get_setup_stages"
+
+extend_bootinfo = "qcs_hrms.utils.extend_bootinfo"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "qcs_hrms.uninstall.before_uninstall"
-# after_uninstall = "qcs_hrms.uninstall.after_uninstall"
-
-# Integration Setup
-# ------------------
-# To set up dependencies/integrations with other apps
-# Name of the app being installed is passed as an argument
-
-# before_app_install = "qcs_hrms.utils.before_app_install"
-# after_app_install = "qcs_hrms.utils.after_app_install"
-
-# Integration Cleanup
-# -------------------
-# To clean up dependencies/integrations with other apps
-# Name of the app being uninstalled is passed as an argument
-
-# before_app_uninstall = "qcs_hrms.utils.before_app_uninstall"
-# after_app_uninstall = "qcs_hrms.utils.after_app_uninstall"
-
-# Build
-# ------------------
-# To hook into the build process
-
-# after_build = "qcs_hrms.build.after_build"
-
-# To hook into the build process of other apps
-# The list of apps being built is passed as an argument
-
-# after_app_build = "qcs_hrms.build.after_app_build"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "qcs_hrms.notifications.get_notification_config"
-
-# Awesome Bar
-# -----------
-# Extra search results: list of dicts with label, description, route, index.
-# route: ["List", "ToDo"], "/desk/docs/some/page", or "https://example.com"
-# awesomebar_search = ["qcs_hrms.search.awesomebar_results"]
+before_uninstall = "qcs_hrms.uninstall.before_uninstall"
 
 # Permissions
 # -----------
-# Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+has_upload_permission = {"Employee": "qcs_hrms.organization.doctype.employee.employee.has_upload_permission"}
+
+# Search queries
+# --------------
+
+standard_queries = {"Employee": "qcs_hrms.controllers.queries.employee_query"}
 
 # Document Events
 # ---------------
-# Hook on document methods and events
+# Employee, Company and Holiday List logic lives in their own controllers (Organization module).
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"User": {
+		"validate": [
+			"qcs_hrms.organization.doctype.employee.employee.validate_employee_role",
+			"qcs_hrms.organization.doctype.employee.employee.update_approver_user_roles",
+		],
+	},
+	"ToDo": {
+		"on_update": "qcs_hrms.controllers.employee_boarding_controller.update_boarding_status_from_todo",
+	},
+}
+
+# HR Payment references: {"Expense Claim": "dotted.path"}, called with (payment_doc, reference_row, cancel)
+# when an HR Payment is submitted/cancelled, so the owning doctype updates its paid amount/status.
+qcs_hrms_payment_reference_handlers = {
+	"Expense Claim": "qcs_hrms.hr.doctype.expense_claim.expense_claim.update_payment_for_expense_claim",
+	"Employee Advance": "qcs_hrms.hr.doctype.employee_advance.employee_advance.update_employee_advance_for_payment",
+	"Leave Encashment": "qcs_hrms.hr.doctype.leave_encashment.leave_encashment.update_payment_for_leave_encashment",
+	"Full and Final Statement": "qcs_hrms.hr.doctype.full_and_final_statement.full_and_final_statement.update_full_and_final_statement_status",
+	"Salary Slip": "qcs_hrms.payroll.doctype.salary_slip.salary_slip.update_payment_reference",
+	"Payroll Entry": "qcs_hrms.payroll.doctype.payroll_entry.payroll_entry.update_payment_reference",
+	"Gratuity": "qcs_hrms.payroll.doctype.gratuity.gratuity.update_payment_reference",
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"qcs_hrms.tasks.all"
-# 	],
-# 	"daily": [
-# 		"qcs_hrms.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"qcs_hrms.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"qcs_hrms.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"qcs_hrms.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"all": [
+		"qcs_hrms.hr.doctype.interview.interview.send_interview_reminder",
+	],
+	"hourly": [
+		"qcs_hrms.hr.doctype.daily_work_summary_group.daily_work_summary_group.trigger_emails",
+	],
+	"hourly_long": [
+		"qcs_hrms.hr.doctype.shift_type.shift_type.update_last_sync_of_checkin",
+		"qcs_hrms.hr.doctype.shift_type.shift_type.process_auto_attendance_for_all_shifts",
+		"qcs_hrms.hr.doctype.shift_schedule_assignment.shift_schedule_assignment.process_auto_shift_creation",
+	],
+	"daily": [
+		"qcs_hrms.controllers.employee_reminders.send_birthday_reminders",
+		"qcs_hrms.controllers.employee_reminders.send_work_anniversary_reminders",
+		"qcs_hrms.hr.doctype.daily_work_summary_group.daily_work_summary_group.send_summary",
+		"qcs_hrms.hr.doctype.interview.interview.send_daily_feedback_reminder",
+		"qcs_hrms.hr.doctype.shift_assignment.shift_assignment.mark_expired_shift_assignments_as_inactive",
+		"qcs_hrms.hr.doctype.job_opening.job_opening.close_expired_job_openings",
+	],
+	"daily_long": [
+		"qcs_hrms.hr.doctype.leave_ledger_entry.leave_ledger_entry.process_expired_allocation",
+		"qcs_hrms.hr.utils.generate_leave_encashment",
+		"qcs_hrms.hr.utils.allocate_earned_leaves",
+	],
+	"weekly": ["qcs_hrms.controllers.employee_reminders.send_reminders_in_advance_weekly"],
+	"monthly": ["qcs_hrms.controllers.employee_reminders.send_reminders_in_advance_monthly"],
+}
+
+audit_trail_doctypes = ["Expense Claim", "Payroll Entry", "Salary Slip", "Leave Encashment", "Gratuity"]
 
 # Testing
 # -------
 
-# before_tests = "qcs_hrms.install.before_tests"
+before_tests = "qcs_hrms.tests.test_utils.before_tests"
 
-# Extend DocType Class
-# ------------------------------
-#
-# Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "qcs_hrms.custom.task.CustomTaskMixin"
-# }
+# Regional overrides
+# ------------------
 
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "qcs_hrms.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "qcs_hrms.task.get_dashboard_data"
-# }
+regional_overrides = {
+	"India": {
+		"qcs_hrms.hr.utils.calculate_annual_eligible_hra_exemption": "qcs_hrms.regional.india.utils.calculate_annual_eligible_hra_exemption",
+		"qcs_hrms.hr.utils.calculate_hra_exemption_for_period": "qcs_hrms.regional.india.utils.calculate_hra_exemption_for_period",
+		"qcs_hrms.hr.utils.calculate_tax_with_marginal_relief": "qcs_hrms.regional.india.utils.calculate_tax_with_marginal_relief",
+	},
+}
 
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
+# Global Search
+# -------------
 
-# Ignore links to specified DocTypes when deleting documents
-# -----------------------------------------------------------
+global_search_doctypes = {
+	"Default": [
+		{"doctype": "Employee", "index": 18},
+		{"doctype": "Salary Slip", "index": 19},
+		{"doctype": "Leave Application", "index": 20},
+		{"doctype": "Expense Claim", "index": 21},
+		{"doctype": "Employee Grade", "index": 37},
+		{"doctype": "Job Opening", "index": 39},
+		{"doctype": "Job Applicant", "index": 40},
+		{"doctype": "Job Offer", "index": 41},
+		{"doctype": "Salary Structure Assignment", "index": 42},
+		{"doctype": "Appraisal", "index": 43},
+	],
+}
 
-# ignore_links_on_delete = ["Communication", "ToDo"]
-
-# Request Events
-# ----------------
-# before_request = ["qcs_hrms.utils.before_request"]
-# after_request = ["qcs_hrms.utils.after_request"]
-
-# Job Events
-# ----------
-# before_job = ["qcs_hrms.utils.before_job"]
-# after_job = ["qcs_hrms.utils.after_job"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"qcs_hrms.auth.validate"
-# ]
-
-# Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
-
-# default_log_clearing_doctypes = {
-# 	"Logging DocType Name": 30  # days to retain logs
-# }
+ignore_links_on_delete = ["PWA Notification"]
 
 # Translation
-# ------------
-# List of apps whose translatable strings should be excluded from this app's translations.
-# ignore_translatable_strings_from = []
+# --------------------------------
 
+# List of apps whose translatable strings should be excluded from this app's translations.
+ignore_translatable_strings_from = ["frappe"]
+
+export_python_type_annotations = True
+require_type_annotated_api_methods = True
