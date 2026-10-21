@@ -56,3 +56,4 @@ jspm_packages/
 
 # Built assets
 qcs_hrms/public/dist
+qcs_hrms/public/node_modules

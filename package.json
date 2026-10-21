@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "qcs_hrms",
+  "description": "Standalone fork of Frappe HR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuarkCyberSystems/qcs_hrms.git"
+  },
+  "author": "Quark Cyber System FZC",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  }
+}
