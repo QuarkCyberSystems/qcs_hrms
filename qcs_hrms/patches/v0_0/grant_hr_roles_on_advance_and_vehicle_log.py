@@ -24,11 +24,15 @@ def execute():
 	The ESS user type setup creates Custom DocPerms for these doctypes, which replace the standard
 	permissions entirely, so HR roles added to the doctype JSON would otherwise not apply.
 	"""
-	for doctype in DOCTYPES:
+	copy_standard_perms_to_custom(DOCTYPES, ROLES)
+
+
+def copy_standard_perms_to_custom(doctypes, roles):
+	for doctype in doctypes:
 		if not frappe.db.exists("Custom DocPerm", {"parent": doctype}):
 			continue
 
-		for role in ROLES:
+		for role in roles:
 			standard = frappe.db.get_value(
 				"DocPerm",
 				{"parent": doctype, "role": role, "permlevel": 0, "if_owner": 0},

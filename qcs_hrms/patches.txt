@@ -4,3 +4,4 @@
 [post_model_sync]
 # Patches added in this folder will be executed after creating new columns
 qcs_hrms.patches.v0_0.grant_hr_roles_on_advance_and_vehicle_log
+qcs_hrms.patches.v0_0.allow_submit_on_gratuity_and_travel_request

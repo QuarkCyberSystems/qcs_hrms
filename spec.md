@@ -300,6 +300,9 @@ Integration flow:
   Expenses reports. The ESS user type setup copies standard permissions into Custom DocPerms, which then
   replace them. On sites installed before this change, the patch
   `v0_0.grant_hr_roles_on_advance_and_vehicle_log` adds the HR roles to those Custom DocPerms.
+- Travel Request also grants HR Manager and HR User full access. Gratuity (HR Manager, HR User) and
+  Travel Request can now be submitted, cancelled and amended; upstream gave no role those rights, so
+  only Administrator could submit them. Patch: `v0_0.allow_submit_on_gratuity_and_travel_request`.
 
 ## 9. Payroll module design changes
 
